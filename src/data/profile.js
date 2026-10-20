@@ -4,6 +4,7 @@ export const profile = {
     'Hola, bienvenido a mi portafolio.',
 
   photo: '/foto-perfil.jpeg',
+  
   hero: {
     background: {
       type: 'gradient', 
