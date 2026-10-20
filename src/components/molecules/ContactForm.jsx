@@ -13,7 +13,7 @@ const ContactForm = ({ onSubmit, isSubmitting }) => {
     <Form.Root onSubmit={handleSubmit} style={{ width: '100%', maxWidth: 600 }}>
       <Flex direction="column" gap="4">
         <FormField name="nombre" label="Nombre Completo" errors={[{ match: 'valueMissing', message: 'Por favor, ingresa tu nombre' }]}>
-          <TextField.Root size="3" required placeholder="Ej: Juan Pérez">
+          <TextField.Root size="3" required placeholder="Ej: christofer Robin">
             <TextField.Slot>
               <PersonIcon />
             </TextField.Slot>

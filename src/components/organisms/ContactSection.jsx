@@ -18,7 +18,7 @@ const ContactSection = ({ sectionRef, github, linkedin, formOptions }) => {
   return (
     <SectionBlock id="contacto" sectionRef={sectionRef} title="Contacto" alternate>
       <Flex direction="column" align="center" gap="6">
-        <Text as="p" size="4" align="center" style={{ width: '100%', maxWidth: 600 }}>
+        <Text as="p" size="4" align="center" mb="-3" style={{ width: '100%' }}>
           ¿Quiere contactarme? ¡Complete el formulario y le responderé lo antes posible!
         </Text>
         {renderForm()}
