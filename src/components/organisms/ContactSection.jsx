@@ -1,19 +1,20 @@
-import { Flex, Text } from '@radix-ui/themes'
+import { Container, Flex, Heading, Text, Box } from '@radix-ui/themes';
 import SectionBlock from '../molecules/SectionBlock'
 import SocialLinks from '../molecules/SocialLinks'
 import ContactForm from '../molecules/ContactForm'
 import FormSuccess from '../molecules/FormSuccess'
-import { useContactForm } from '../../hooks/useContactForm'
+
+import { useContactForm } from '../../hooks/useContactForm';
 
 const ContactSection = ({ sectionRef, github, linkedin, formOptions }) => {
-  const { isSubmitting, isSubmitted, isApiReady, onFinishContact, handleResetFormState } = useContactForm(formOptions)
+  const { handleSubmit, isSubmitting, result, handleResetFormState } = useContactForm();
 
-  
   const renderForm = () => {
-    if (!isApiReady) return <Text color="gray">Cargando módulo de mensajería de forma segura...</Text>
-    if (isSubmitted) return <FormSuccess onReset={handleResetFormState} />
-    return <ContactForm onSubmit={onFinishContact} isSubmitting={isSubmitting} />
-  }
+    if (result === "¡Mensaje enviado con éxito!") {
+      return <FormSuccess onReset={handleResetFormState} />
+    }
+    return <ContactForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+  };
 
   return (
     <SectionBlock id="contacto" sectionRef={sectionRef} title="Contacto" alternate>
@@ -26,6 +27,7 @@ const ContactSection = ({ sectionRef, github, linkedin, formOptions }) => {
       </Flex>
     </SectionBlock>
   )
-}
 
-export default ContactSection
+};
+
+export default ContactSection;

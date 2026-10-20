@@ -1,30 +1,48 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react';
 
-// Simula el envío al servidor. Aquí conectarías EmailJS, Formspree, etc.
-const sendMessage = (values, delay) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(values), delay)
-  })
+export const useContactForm = () => {
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-export const useContactForm = ({ readyDelay = 1000, submitDelay = 1500 } = {}) => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isApiReady, setIsApiReady] = useState(false)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Enviando...");
 
-  // Ciclo de vida: al montar activa el módulo; al desmontar limpia el temporizador
-  useEffect(() => {
-    const timer = setTimeout(() => setIsApiReady(true), readyDelay)
-    return () => clearTimeout(timer)
-  }, [readyDelay])
+    try {
+      const formData = new FormData(event.currentTarget);
+      formData.append("access_key", "96387775-1e0a-4bab-a929-99e2af3f6aa6");
 
-  const onFinishContact = async (values) => {
-    setIsSubmitting(true)
-    await sendMessage(values, submitDelay)
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-  const handleResetFormState = () => setIsSubmitted(false)
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+        signal: controller.signal
+      });
 
-  return { isSubmitting, isSubmitted, isApiReady, onFinishContact, handleResetFormState }
-}
+      clearTimeout(timeoutId);
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("¡Mensaje enviado con éxito!");
+        event.currentTarget.reset();
+      } else {
+        setResult(data.message || "Error al enviar el mensaje.");
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        setResult("La petición tardó demasiado. Inténtalo de nuevo.");
+      } else {
+        setResult("Error de conexión. Revisa tu internet.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return { handleSubmit, isSubmitting, result };
+};

@@ -1,17 +1,16 @@
-import { Button, Flex, TextArea, TextField } from '@radix-ui/themes'
-import * as Form from '@radix-ui/react-form'
-import { EnvelopeClosedIcon, PersonIcon } from '@radix-ui/react-icons'
-import FormField from './FormField'
+import { Button, Flex, TextArea, TextField, Text } from '@radix-ui/themes';
+import * as Form from '@radix-ui/react-form';
+import { EnvelopeClosedIcon, PersonIcon } from '@radix-ui/react-icons';
+import FormField from './FormField';
+import { useContactForm } from '../../hooks/useContactForm'; 
 
-const ContactForm = ({ onSubmit, isSubmitting }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    onSubmit(Object.fromEntries(new FormData(event.currentTarget)))
-  }
+export default function ContactForm() {
+  const { handleSubmit, isSubmitting, result } = useContactForm(); 
 
   return (
     <Form.Root onSubmit={handleSubmit} style={{ width: '100%', maxWidth: 600 }}>
       <Flex direction="column" gap="4">
+        
         <FormField name="nombre" label="Nombre Completo" errors={[{ match: 'valueMissing', message: 'Por favor, ingresa tu nombre' }]}>
           <TextField.Root size="3" required placeholder="Ej: christofer Robin">
             <TextField.Slot>
@@ -40,13 +39,18 @@ const ContactForm = ({ onSubmit, isSubmitting }) => {
         </FormField>
 
         <Form.Submit asChild>
-          <Button size="3" loading={isSubmitting}>
+          <Button size="3" disabled={isSubmitting} style={{ cursor: 'pointer' }}>
             {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
           </Button>
         </Form.Submit>
+
+        {result && (
+          <Text size="2" align="center" color={result.includes("éxito") ? "green" : result.includes("Enviando") ? "gray" : "red"}>
+            {result}
+          </Text>
+        )}
+
       </Flex>
     </Form.Root>
-  )
+  );
 }
-
-export default ContactForm

@@ -3,45 +3,46 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useContactForm } from './useContactForm'
 
 describe('useContactForm', () => {
-  beforeEach(() => vi.useFakeTimers())
-  afterEach(() => vi.useRealTimers())
+  beforeEach(() => {
+    // Simulamos fetch globalmente para las pruebas del hook
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      json: async () => ({ success: true }),
+    })
+  })
 
-  it('inicia con el módulo de mensajería cargando', () => {
-    const { result } = renderHook(() => useContactForm({ readyDelay: 500 }))
-    expect(result.current.isApiReady).toBe(false)
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('inicia con los estados correctos', () => {
+    const { result } = renderHook(() => useContactForm())
     expect(result.current.isSubmitting).toBe(false)
-    expect(result.current.isSubmitted).toBe(false)
+    expect(result.current.result).toBe('')
   })
 
-  it('activa el módulo cuando termina el tiempo de carga', async () => {
-    const { result } = renderHook(() => useContactForm({ readyDelay: 500 }))
-    await act(async () => { vi.advanceTimersByTime(500) })
-    expect(result.current.isApiReady).toBe(true)
-  })
+  it('maneja el envío del formulario de forma exitosa', async () => {
+    const { result } = renderHook(() => useContactForm())
 
-  it('muestra el estado de envío y luego confirma el envío', async () => {
-    const { result } = renderHook(() => useContactForm({ readyDelay: 0, submitDelay: 300 }))
-    await act(async () => { vi.advanceTimersByTime(0) })
+    // Creamos un evento de formulario simulado
+    const fakeEvent = {
+      preventDefault: vi.fn(),
+      currentTarget: document.createElement('form')
+    }
+
     let promise
     act(() => {
-      promise = result.current.onFinishContact({
-        nombre: 'Ana Pérez',
-        email: 'ana@example.com',
-        mensaje: 'Quisiera conversar sobre un proyecto',
-      })
+      promise = result.current.handleSubmit(fakeEvent)
     })
-    expect(result.current.isSubmitting).toBe(true)
-    await act(async () => { vi.advanceTimersByTime(300); await promise })
-    expect(result.current.isSubmitting).toBe(false)
-    expect(result.current.isSubmitted).toBe(true)
-  })
 
-  it('permite restablecer el estado después del envío', async () => {
-    const { result } = renderHook(() => useContactForm({ readyDelay: 0, submitDelay: 10 }))
-    let promise
-    act(() => { promise = result.current.onFinishContact({ nombre: 'Ana' }) })
-    await act(async () => { vi.advanceTimersByTime(10); await promise })
-    act(() => result.current.handleResetFormState())
-    expect(result.current.isSubmitted).toBe(false)
+    expect(result.current.isSubmitting).toBe(true)
+    expect(result.current.result).toBe('Enviando...')
+
+    await act(async () => {
+      await promise
+    })
+
+    expect(result.current.isSubmitting).toBe(false)
+    expect(result.current.result).toBe('¡Mensaje enviado con éxito!')
+    expect(global.fetch).toHaveBeenCalledTimes(1)
   })
 })
