@@ -33,12 +33,12 @@ src/
 
 ## 📋 Secciones del Portafolio
 
-Sección Personal (Hero): Presentación profesional con avatar estilizado y descripción biográfica.
-Experiencia Laboral: Historial cronológico de cargos y empresas desempeñadas.
-Estudios: Detalle de formación académica y certificaciones.
-Desarrollos y Proyectos: Grilla interactiva de proyectos destacados con enlaces a repositorios.
-Contacto: Enlaces directos a redes sociales (GitHub, LinkedIn) y formulario de contacto validado con Web3Forms.
-Footer: Pie de página dinámico con cálculo automático del año actual y datos de contacto.
+Sección Personal (Hero): Presentación profesional con avatar estilizado y descripción biográfica.<br>
+Experiencia Laboral: Historial cronológico de cargos y empresas desempeñadas.<br>
+Estudios: Detalle de formación académica y certificaciones.<br>
+Desarrollos y Proyectos: Grilla interactiva de proyectos destacados con enlaces a repositorios.<br>
+Contacto: Enlaces directos a redes sociales (GitHub, LinkedIn) y formulario de contacto validado con Web3Forms.<br>
+Footer: Pie de página dinámico con cálculo automático del año actual y datos de contacto.<br>
 
 ---
 
