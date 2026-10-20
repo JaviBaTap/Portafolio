@@ -1,6 +1,6 @@
 import { Button, Container, Flex } from '@radix-ui/themes'
-import { gradients } from '../theme/palette'
-import { menuItems } from '../data/menu'
+import { gradients } from '../../theme/palette'
+import { menuItems } from '../../data/menu'
 
 const Navbar = ({ activeSection, onNavigate }) => (
   <nav

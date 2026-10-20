@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Flex, Heading, Text } from '@radix-ui/themes'
 import { BackpackIcon } from '@radix-ui/react-icons'
-import Seccion from './Seccion'
-import { colors } from '../theme/palette'
+import Seccion from '../atoms/Section'
+import { colors } from '../../theme/palette'
 
 const ExperienceSection = ({ sectionRef, experiences, emptyState, onNavigate }) => (
   <Seccion id="experiencia-laboral" sectionRef={sectionRef} title="Experiencia Laboral">

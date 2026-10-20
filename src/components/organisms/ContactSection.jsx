@@ -1,8 +1,8 @@
 import { Button, Callout, Card, Flex, Heading, Text, TextArea, TextField } from '@radix-ui/themes'
 import * as Form from '@radix-ui/react-form'
 import { CheckCircledIcon, EnvelopeClosedIcon, GitHubLogoIcon, InfoCircledIcon, LinkedInLogoIcon, PersonIcon } from '@radix-ui/react-icons'
-import Seccion from './Seccion'
-import { useContactForm } from '../hooks/useContactForm'
+import Seccion from '../atoms/Section'
+import { useContactForm } from '../../hooks/useContactForm'
 
 
 const FieldError = ({ match, children }) => (

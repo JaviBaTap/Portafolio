@@ -1,124 +1,34 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Flex } from '@radix-ui/themes'
+import { profile } from './data/profile'
+import { projects } from './data/projects'
+import { experiences, emptyExperience } from './data/experiences'
+import { menuItems } from './data/menu'
+import { useScrollSections } from './hooks/useScrollSections'
+import Navbar from './components/organisms/Navbar'
+import Hero from './components/organisms/Hero'
+import ExperienceSection from './components/organisms/ExperienceSection'
+import EducationSection from './components/organisms/EducationSection'
+import ProjectsSection from './components/organisms/ProjectsSection'
+import ContactSection from './components/organisms/ContactSection'
+import Footer from './components/organisms/Footer'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const { activeSection, registerRef, scrollToSection } = useScrollSections(menuItems.map((i) => i.key))
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-black font-bold py-2 px-4 rounded-lg shadow-lg">
-          Aceptar
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <Flex direction="column" style={{ minHeight: '100vh' }}>
+      <Navbar activeSection={activeSection} onNavigate={scrollToSection} />
+      <main style={{ flex: 1 }}>
+        <Hero sectionRef={registerRef('inicio')} name={profile.name} greeting={profile.greeting}
+          photo={profile.photo} background={profile.hero.background} />
+        <ExperienceSection sectionRef={registerRef('experiencia-laboral')} experiences={experiences}
+          emptyState={emptyExperience} onNavigate={scrollToSection} />
+        <EducationSection sectionRef={registerRef('estudios')} />
+        <ProjectsSection sectionRef={registerRef('proyectos')} projects={projects} />
+        <ContactSection sectionRef={registerRef('contacto')} github={profile.github} linkedin={profile.linkedin} />
+      </main>
+      <Footer name={profile.name} email={profile.email} phone={profile.phone} />
+    </Flex>
   )
 }
 

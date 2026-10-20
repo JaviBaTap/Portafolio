@@ -1,6 +1,6 @@
 import { Grid, Text } from '@radix-ui/themes'
-import Seccion from './Seccion'
-import ProjectCard from './ProjectCard'
+import Seccion from '../atoms/Section'
+import ProjectCard from '../molecules/ProjectCard'
 
 const ProjectsSection = ({ sectionRef, projects }) => (
   <Seccion id="proyectos" sectionRef={sectionRef} title="Desarrollos y Proyectos">

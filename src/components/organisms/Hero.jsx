@@ -1,6 +1,6 @@
 import { Avatar, Box, Container, Flex, Heading, Text } from '@radix-ui/themes'
-import { buildHeroBackground } from '../theme/heroBackground'
-import { getInitials } from '../utils/getInitials'
+import { buildHeroBackground } from '../../theme/heroBackground'
+import { getInitials } from '../../utils/getInitials'
 
 const Hero = ({ sectionRef, name, greeting, photo, background }) => {
   const type = background?.type === 'image' ? 'image' : 'gradient'

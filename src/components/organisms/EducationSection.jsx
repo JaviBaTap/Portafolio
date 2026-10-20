@@ -1,5 +1,5 @@
 import { Text } from '@radix-ui/themes';
-import Seccion from './Seccion';
+import Seccion from '../atoms/Section';
 
 const EducationSection = ({ sectionRef }) => (
   <Seccion id="estudios" sectionRef={sectionRef} title="Estudios y Certificaciones" alternate>

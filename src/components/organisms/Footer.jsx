@@ -1,6 +1,6 @@
 import { Container, Flex, Text } from '@radix-ui/themes'
 import { EnvelopeClosedIcon, MobileIcon } from '@radix-ui/react-icons'
-import { colors, gradients } from '../theme/palette'
+import { colors, gradients } from '../../theme/palette'
 
 const linkStyle = { color: '#fff', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }
 
