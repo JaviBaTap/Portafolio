@@ -1,33 +1,60 @@
-import { Button, Container, Flex } from '@radix-ui/themes'
-import { gradients } from '../../theme/palette'
-import { menuItems } from '../../data/menu'
+import { Flex, Button, Container } from '@radix-ui/themes';
 
-const Navbar = ({ activeSection, onNavigate }) => (
-  <nav
-    aria-label="Navegación principal"
-    style={{
-      position: 'sticky', top: 0, zIndex: 100, background: '#fff',
-      borderBottom: '3px solid transparent', borderImage: `${gradients.accent} 1`,
-    }}
-  >
-    <Container size="4" px="4">
-      <Flex gap="2" py="2" wrap="wrap">
-        {menuItems.map((item) => {
-          const active = activeSection === item.key
-          return (
-            <Button
-              key={item.key}
-              variant={active ? 'soft' : 'ghost'}
-              color={active ? 'red' : 'gray'}
-              onClick={() => onNavigate(item.key)}
-            >
-              {item.label}
-            </Button>
-          )
-        })}
-      </Flex>
-    </Container>
-  </nav>
-)
+const Navbar = ({ onNavigate }) => {
+  return (
+    <header style={{ 
+      position: 'absolute', 
+      top: 0, 
+      left: 0, 
+      width: '100%', 
+      zIndex: 10,
+      padding: '16px 0' 
+    }}>
+      <Container size="4">
+        <Flex justify="center" gap="3" wrap="wrap">
+          <Button 
+            variant="ghost" 
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={() => onNavigate('inicio')}
+          >
+            Inicio
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={() => onNavigate('experiencia')}
+          >
+            Experiencia Laboral
+          </Button>
 
-export default Navbar
+          <Button 
+            variant="ghost" 
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={() => onNavigate('estudios')}
+          >
+            Estudios
+          </Button>
+
+          <Button 
+            variant="ghost" 
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={() => onNavigate('proyectos')}
+          >
+            Desarrollos y Proyectos
+          </Button>
+
+          <Button 
+            variant="ghost" 
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={() => onNavigate('contacto')}
+          >
+            Contacto
+          </Button>
+        </Flex>
+      </Container>
+    </header>
+  );
+};
+
+export default Navbar;

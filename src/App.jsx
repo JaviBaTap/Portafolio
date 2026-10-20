@@ -1,4 +1,4 @@
-import { Flex } from '@radix-ui/themes'
+import { Flex, Theme } from '@radix-ui/themes'
 import { profile } from './data/profile'
 import { projects } from './data/projects'
 import { experiences, emptyExperience } from './data/experiences'
@@ -11,6 +11,7 @@ import EducationSection from './components/organisms/EducationSection'
 import ProjectsSection from './components/organisms/ProjectsSection'
 import ContactSection from './components/organisms/ContactSection'
 import Footer from './components/organisms/Footer'
+import '@radix-ui/themes/styles.css'; 
 
 const App = () => {
   const { activeSection, registerRef, scrollToSection } = useScrollSections(menuItems.map((i) => i.key))
