@@ -5,7 +5,7 @@ Aplicación web interactiva de tipo **Portafolio Personal** desarrollada con tec
 ---
 
 ## 🛠️ Tecnologías y Librerías Utilizadas
-* **React 18+** (con Vite para un rendimiento ultrarrápido)
+* **React 19** (con Vite para un rendimiento ultrarrápido)
 * **Radix UI Themes & Icons** (Librería de componentes de interfaz accesibles y estilizados)
 * **Web3Forms API** (Integración para el formulario de contacto directo al correo)
 * **Vitest & Testing Library** (Suite de pruebas unitarias y de integración)
@@ -42,22 +42,28 @@ Footer: Pie de página dinámico con cálculo automático del año actual y dato
 
 ---
 
+## Personalizar el contenido
+Todo el contenido se edita en src/data/ (sin tocar los componentes). Las imágenes van en public/.
+
+---
+
 ## ⚙️ Instrucciones de Instalación y Ejecución Local
 
 Sigue estos pasos para levantar el proyecto en tu máquina local:
 
 1. Clonar el repositorio 
 
-    git clone <url-de-tu-repositorio>
+    git clone <https://github.com/JaviBaTap/Portafolio.git>
 
     cd Portafolio-main
 
 2. Instalar dependencias
-Asegúrate de tener instalado Node.js (versión 18 o superior recomendada) y ejecuta:
+Asegúrate de tener instalado Node.js (versión 20.19 o superior recomendada) y ejecuta:
 
     npm install
 
-3. Ejecutar en modo desarrolloPara iniciar el servidor local de desarrollo con Vite:
+3. Ejecutar en modo desarrollo
+Para iniciar el servidor local de desarrollo con Vite:
 
     npm run dev
 
@@ -68,7 +74,6 @@ Para correr la suite de pruebas unitarias e de integración con Vitest:
     
     npm test
 
-(Opcional con interfaz gráfica: npm run test:ui)
 
 ---
 
