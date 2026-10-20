@@ -1,4 +1,4 @@
-import { Container, Flex, Heading, Text, Box } from '@radix-ui/themes';
+import {  Flex, Text, } from '@radix-ui/themes';
 import SectionBlock from '../molecules/SectionBlock'
 import SocialLinks from '../molecules/SocialLinks'
 import ContactForm from '../molecules/ContactForm'
@@ -6,7 +6,7 @@ import FormSuccess from '../molecules/FormSuccess'
 
 import { useContactForm } from '../../hooks/useContactForm';
 
-const ContactSection = ({ sectionRef, github, linkedin, formOptions }) => {
+const ContactSection = ({ sectionRef, github, linkedin, }) => {
   const { handleSubmit, isSubmitting, result, handleResetFormState } = useContactForm();
 
   const renderForm = () => {

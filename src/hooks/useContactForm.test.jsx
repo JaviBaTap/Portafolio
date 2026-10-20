@@ -1,10 +1,9 @@
-import { act, renderHook, waitFor } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useContactForm } from './useContactForm'
 
 describe('useContactForm', () => {
   beforeEach(() => {
-    // Simulamos fetch globalmente para las pruebas del hook
     vi.spyOn(global, 'fetch').mockResolvedValue({
       json: async () => ({ success: true }),
     })
@@ -23,7 +22,6 @@ describe('useContactForm', () => {
   it('maneja el envío del formulario de forma exitosa', async () => {
     const { result } = renderHook(() => useContactForm())
 
-    // Creamos un evento de formulario simulado
     const fakeEvent = {
       preventDefault: vi.fn(),
       currentTarget: document.createElement('form')
