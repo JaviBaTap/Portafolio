@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useContactForm = () => {
+export const useContactForm = (formRef) => {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -11,38 +11,39 @@ export const useContactForm = () => {
 
     try {
       const formData = new FormData(event.currentTarget);
-      formData.append("access_key", "96387775-1e0a-4bab-a929-99e2af3f6aa6");
-
       
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      formData.append("access_key", "96387775-1e0a-4bab-a929-99e2af3f6aa6");
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
-        signal: controller.signal
+        headers: {
+          "Accept": "application/json"
+        },
+        body: formData
       });
-
-      clearTimeout(timeoutId);
 
       const data = await response.json();
 
       if (data.success) {
         setResult("¡Mensaje enviado con éxito!");
-        event.currentTarget.reset();
+        if (formRef && formRef.current) {
+          formRef.current.reset();
+        }
       } else {
-        setResult(data.message || "Error al enviar el mensaje.");
+        setResult(data.message || "Ocurrió un error al procesar el mensaje.");
       }
     } catch (error) {
-      if (error.name === 'AbortError') {
-        setResult("La petición tardó demasiado. Inténtalo de nuevo.");
-      } else {
-        setResult("Error de conexión. Revisa tu internet.");
-      }
+      console.error("Web3Forms Submit Error:", error);
+      setResult("Error de conexión. Inténtalo de nuevo.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  return { handleSubmit, isSubmitting, result };
+  const handleResetFormState = () => {
+    setResult("");
+    setIsSubmitting(false);
+  };
+
+  return { handleSubmit, isSubmitting, result, handleResetFormState };
 };
