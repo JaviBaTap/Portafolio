@@ -3,7 +3,7 @@ import { Badge, Button, Card, Flex, Heading, Inset, Text } from '@radix-ui/theme
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { colors, gradients } from '../../theme/palette'
 
-// OJO: el 'display' va aparte, en cada caso (si lo pones aquí, pisa al Flex y la letra queda arriba a la izquierda)
+
 const coverStyle = { width: '100%', height: 200, borderBottom: `3px solid ${colors.red.main}` }
 
 const ProjectCard = ({ project }) => {

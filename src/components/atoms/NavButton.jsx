@@ -7,6 +7,7 @@ const NavButton = ({ active = false, onClick, children }) => (
     aria-current={active ? 'location' : undefined}
     onClick={onClick}
     style={active ? undefined : { color: '#fff' }}
+    mx="2"
   >
     {children}
   </Button>
