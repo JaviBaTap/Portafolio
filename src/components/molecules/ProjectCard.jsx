@@ -3,10 +3,12 @@ import { Badge, Button, Card, Flex, Heading, Inset, Text } from '@radix-ui/theme
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { colors, gradients } from '../../theme/palette'
 
+// OJO: el 'display' va aparte, en cada caso (si lo pones aquí, pisa al Flex y la letra queda arriba a la izquierda)
+const coverStyle = { width: '100%', height: 200, borderBottom: `3px solid ${colors.red.main}` }
+
 const ProjectCard = ({ project }) => {
   const [imageFailed, setImageFailed] = useState(false)
   const showImage = project.image && !imageFailed
-  const coverStyle = { width: '100%', height: 180, display: 'block', borderBottom: `3px solid ${colors.red.main}` }
 
   return (
     <Card size="2" data-testid="project-card">
@@ -16,20 +18,32 @@ const ProjectCard = ({ project }) => {
             src={project.image}
             alt={`Previsualización de ${project.title}`}
             onError={() => setImageFailed(true)}
-            style={{ ...coverStyle, objectFit: 'cover' }}
+            style={{ ...coverStyle, display: 'block', objectFit: 'cover', objectPosition: 'top' }}
           />
         ) : (
-          <Flex align="center" justify="center" aria-hidden="true" style={{ ...coverStyle, background: gradients.card, color: '#fff', fontSize: 56, fontWeight: 800 }}>
+          <Flex
+            align="center"
+            justify="center"
+            aria-hidden="true"
+            style={{ ...coverStyle, background: gradients.card, color: '#fff', fontSize: 56, fontWeight: 800 }}
+          >
             {project.title.charAt(0)}
           </Flex>
         )}
       </Inset>
-      <Heading as="h3" size="4" mb="1" style={{ color: colors.purple.dark }}>
+
+      <Heading as="h3" size="5" mb="2" style={{ color: colors.purple.dark }}>
         {project.title}
       </Heading>
-      <Text as="p" size="2" color="gray" mb="3">{project.description}</Text>
-      <Flex gap="1" wrap="wrap" mb="3">
-        {project.tags?.map((tag) => <Badge key={tag} color="blue">{tag}</Badge>)}
+      <Text as="p" size="2" color="gray" mb="3">
+        {project.description}
+      </Text>
+      <Flex gap="2" wrap="wrap" mb="4">
+        {project.tags?.map((tag) => (
+          <Badge key={tag} color="blue">
+            {tag}
+          </Badge>
+        ))}
       </Flex>
       <Button asChild>
         <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">

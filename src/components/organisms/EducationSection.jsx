@@ -1,13 +1,15 @@
-import { Text } from '@radix-ui/themes';
-import Seccion from '../atoms/Section';
+import { Flex } from '@radix-ui/themes'
+import SectionBlock from '../molecules/SectionBlock'
+import EducationCard from '../molecules/EducationCard'
 
-const EducationSection = ({ sectionRef }) => (
-  <Seccion id="estudios" sectionRef={sectionRef} title="Estudios y Certificaciones" alternate>
-    <Text size="3" style={{ fontSize: 16 }}>
-      Obtención de titulo de cuarto medio en 2024.
-      Actualmente estudiando una carrera en Duocuc, obtención de titululo proximamante en 2027
-    </Text>
-  </Seccion>
-);
+const EducationSection = ({ sectionRef, education }) => (
+  <SectionBlock id="estudios" sectionRef={sectionRef} title="Estudios" alternate>
+    <Flex direction="column" gap="4">
+      {education.map((item) => (
+        <EducationCard key={item.id} item={item} />
+      ))}
+    </Flex>
+  </SectionBlock>
+)
 
-export default EducationSection;
+export default EducationSection
