@@ -1,6 +1,7 @@
 import { Avatar, Box, Container, Flex, Heading, Text } from '@radix-ui/themes'
 import { buildHeroBackground } from '../../theme/heroBackground'
 import { getInitials } from '../../utils/getInitials'
+import { NAVBAR_HEIGHT } from '../../theme/layout'
 
 const Hero = ({ sectionRef, name, greeting, photo, background }) => {
   const type = background?.type === 'image' ? 'image' : 'gradient'
@@ -11,13 +12,14 @@ const Hero = ({ sectionRef, name, greeting, photo, background }) => {
       data-testid="hero-section"
       data-bg-type={type}
       style={{
-        minHeight: '85vh', display: 'flex', alignItems: 'center', color: '#fff',
+        minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`,
+        scrollMarginTop: NAVBAR_HEIGHT,
         backgroundImage: buildHeroBackground(background),
         backgroundSize: 'cover', backgroundPosition: 'center',
       }}
     >
-      <Container size="4" px="4" py="9">
-        <Flex align="center" gap="7" wrap="wrap">
+      <Container size="4" px="4" py="9" style={{ width: '100%' }}>
+        <Flex align="center" justify="center" gap="8" wrap="wrap">
           <Avatar
             size="9"
             radius="full"
@@ -26,11 +28,11 @@ const Hero = ({ sectionRef, name, greeting, photo, background }) => {
             color="red"
             variant="solid"
             alt={`Foto de perfil de ${name}`}
-            style={{ border: '5px solid #fff', boxShadow: '0 8px 30px rgba(0,0,0,.35)' }}
+            style={{ border: '3px solid #fff', boxShadow: '0 8px 30px rgba(0,0,0,.35)' }}
           />
           <Box style={{ flex: '1 1 380px' }}>
             <Heading as="h1" size="9" style={{ color: '#fff' }}>{name}</Heading>
-            <Text as="p" size="5" mt="4" style={{ color: 'rgba(255,255,255,.92)', maxWidth: 700 }}>
+            <Text as="p" size="6" mt="4" style={{ color: 'rgba(255,255,255,.92)', maxWidth: 700 }}>
               {greeting}
             </Text>
           </Box>

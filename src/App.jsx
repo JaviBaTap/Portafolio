@@ -1,4 +1,4 @@
-import { Flex, Theme } from '@radix-ui/themes'
+import { Flex } from '@radix-ui/themes'
 import { profile } from './data/profile'
 import { projects } from './data/projects'
 import { experiences, emptyExperience } from './data/experiences'
@@ -11,13 +11,13 @@ import EducationSection from './components/organisms/EducationSection'
 import ProjectsSection from './components/organisms/ProjectsSection'
 import ContactSection from './components/organisms/ContactSection'
 import Footer from './components/organisms/Footer'
-import '@radix-ui/themes/styles.css'; 
+import { NAVBAR_HEIGHT } from './theme/layout'
 
 const App = () => {
   const { activeSection, registerRef, scrollToSection } = useScrollSections(menuItems.map((i) => i.key))
 
   return (
-    <Flex direction="column" style={{ minHeight: '100vh' }}>
+    <Flex direction="column" style={{ minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)`}}>
       <Navbar activeSection={activeSection} onNavigate={scrollToSection} />
       <main style={{ flex: 1 }}>
         <Hero sectionRef={registerRef('inicio')} name={profile.name} greeting={profile.greeting}
