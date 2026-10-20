@@ -16,5 +16,5 @@ export const profile = {
   email: 'JaBanares.Tapia@gmail.com',
   phone: '+56 9 6905 8398',
   github: 'https://github.com/JaviBaTap',
-  linkedin: 'www.linkedin.com/in/javiera-bañares-tapia-162504445',
+  linkedin: 'https://www.linkedin.com/in/javiera-bañares-tapia-162504445',
 };
