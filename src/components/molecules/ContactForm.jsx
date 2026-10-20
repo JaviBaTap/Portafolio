@@ -36,8 +36,8 @@ export default function ContactForm() {
           </TextField.Root>
         </FormField>
 
-        <FormField name="massage" label="Mensaje" errors={[{ match: 'valueMissing', message: 'Por favor, escribe un mensaje' }]}>
-          <TextArea name="massage" size="3" rows={5} required placeholder="Cuéntame sobre tu proyecto u oferta laboral..." />
+        <FormField name="message" label="Mensaje" errors={[{ match: 'valueMissing', message: 'Por favor, escribe un mensaje' }]}>
+          <TextArea name="message" size="3" rows={5} required placeholder="Cuéntame sobre tu proyecto u oferta laboral..." />
         </FormField>
 
         <Form.Submit asChild>
