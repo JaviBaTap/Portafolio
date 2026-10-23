@@ -1,0 +1,14 @@
+Las IA utilizadas en este proyecto fueron 
+
+1. cloude
+2. gemini
+3. chatgpt
+
+Uso de cloude: Le escribi un pront contando lo que queria hacer, los colores que queria utilizar y lo que necesitaba para poder hacerlo, 
+para todo eso le pedi que me lo hiciera una guia para seguir con una estructura de carpetas (siguiendo atomic desing) y un esqueleto de codigo 
+
+Uso de gemini: principalmemnte para verificar que lo que hiciera cloude siguiera los requisitos y resolver los problemas que iban surgiendo 
+
+Uso de Chatgtp: Lo ocupe para hacer los test del proyecto, tambien para la parte del esqueleto del codigo y correccion de errores
+
+basicamente uso los tres al mismo tiempo para hacer la estructura, corregir codigo que fallaba y ver que todo cumpliera y funcionara correctamente
